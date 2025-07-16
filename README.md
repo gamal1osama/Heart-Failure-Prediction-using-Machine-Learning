@@ -1,75 +1,107 @@
-# Heart Failure Prediction Project
+# 🫀 Heart Failure Prediction using Machine Learning
 
-## Overview
-This project focuses on developing machine learning models to predict heart failure events (DEATH_EVENT) based on clinical records. The implementation follows a structured machine learning pipeline from data exploration to model evaluation and feature importance analysis.
+Predicting the likelihood of death events in heart failure patients using clinical features and various classification algorithms.  
+This project applies data cleaning, preprocessing, model training, evaluation, hyperparameter tuning (Optuna), and deployment using `Streamlit` and `Gradio`.
 
-## Project Structure
-The project is organized as a Jupyter notebook (`heart_failure.ipynb`) containing:
-1. **Data Loading and Exploration**
-2. **Data Cleaning and Preprocessing**
-3. **Exploratory Data Analysis (EDA)**
-4. **Feature Engineering**
-5. **Model Training and Evaluation**
-6. **Feature Importance Analysis**
-7. **Model Saving and Deployment**
+---
 
-## Dataset
-The dataset contains 299 patient records with 13 clinical features:
-* **Demographics**: age, sex
-* **Medical Conditions**: anaemia, diabetes, high_blood_pressure, smoking
-* **Clinical Measurements**: creatinine_phosphokinase, ejection_fraction, platelets, serum_creatinine, serum_sodium
-* **Follow-up**: time (days)
-* **Target Variable**: DEATH_EVENT (1 = death, 0 = alive)
+## 📂 Dataset
 
-## Key Features
-* Comprehensive EDA with visualizations
-* Data preprocessing including scaling and handling class imbalance
-* Evaluation of multiple machine learning models:
-   * Logistic Regression
-   * Decision Tree
-   * Random Forest
-   * KNN
-   * XGBoost
-   * Naive Bayes
-   * SVM
-   * LightGBM/CatBoost
-* Feature importance analysis using SHAP values
-* Model saving using pickle/joblib
+- **Source**: [Heart Failure Clinical Records Dataset – Kaggle](https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data/data)
+- **Samples**: 299 patients  
+- **Features**: 13 clinical features + 1 target (`DEATH_EVENT`)
 
-## Requirements
-* Python 3.7+
-* Libraries:
-   * pandas, numpy
-   * matplotlib, seaborn
-   * scikit-learn
-   * XGBoost, LightGBM
-   * SHAP
-   * imbalanced-learn
+---
 
-## Usage
-1. Clone the repository
-2. Install required packages: `pip install -r requirements.txt`
-3. Run the Jupyter notebook: `jupyter notebook heart_failure.ipynb`
+## 📊 Exploratory Data Analysis (EDA)
 
-## Results
-The project evaluates models using multiple metrics:
-* Accuracy
-* Precision
-* Recall
-* F1-score
-* ROC AUC
+Key issues discovered during analysis:
+- **Outliers** in numerical features
+- **Skewed distributions** (e.g., creatinine, platelets)
+- **Imbalanced target class** (more survivors than deaths)
 
-Feature importance analysis reveals the most significant clinical factors contributing to heart failure predictions.
+### ✅ Solutions:
+- Removed outliers using IQR method  
+- Normalized skewed data using `Box-Cox Transformation`  
+- Applied `SMOTE` to balance target class
 
-## Future Work
-* Hyperparameter tuning with Optuna
-* Deployment as a web application
-* Integration with electronic health record systems
-* Additional feature engineering
+---
 
-## License
-This project is open-source and available under the MIT License.
+## 🧹 Preprocessing
 
-## Acknowledgments
-* Dataset source: UCI Machine Learning Repository
-* Special thanks to the open-source community for the libraries used in this project
+- **Train-Test Split** (after SMOTE)
+- **Standardization** using `StandardScaler`
+- **Feature Scaling** only applied to models that require it
+- No feature engineering added – all original features used
+
+---
+
+## 🤖 Models Trained
+
+| Type           | Model                   |
+|----------------|--------------------------|
+| Linear         | Logistic Regression      |
+| Probabilistic  | Naive Bayes              |
+| Distance-Based | K-Nearest Neighbors (KNN)|
+| Margin-Based   | Support Vector Machine   |
+| Tree-Based     | Decision Tree            |
+| Ensemble       | Random Forest            |
+| Boosting       | XGBoost, LightGBM        |
+
+---
+
+## 🏆 Model Comparison
+
+All models were evaluated using:
+
+- **Accuracy**
+- **Precision**
+- **Recall**
+- **F1 Score**
+- **ROC-AUC**
+
+### 📌 Final Choice:
+- ✅ **Model**: `LightGBM`
+- ✅ **Why?**: Achieved **highest performance** across most metrics (especially F1-Score)
+
+---
+
+## 🔍 Hyperparameter Tuning
+
+- Implemented using [`Optuna`](https://optuna.org/)  
+- Tuned parameters like `num_leaves`, `learning_rate`, `max_depth`, etc.  
+- Cross-validated with `StratifiedKFold`  
+- Trained final model with `early_stopping` and best parameters
+
+---
+
+## 🧪 Final Model Pipeline
+
+- Built using `Pipeline` from `scikit-learn`
+- Trained on best `LightGBM` model
+- Supports future integration into web apps / APIs
+- Saved using `joblib`
+
+---
+
+## 🚀 Deployment
+
+The model was deployed using both:
+
+- **Streamlit App** → [🔗 Visit on Hugging Face](https://huggingface.co/spaces/MarwanAmin/Streamlit-Heart-Failure-Prediction-using-ML)
+- **Gradio App** → [🔗 Visit on Hugging Face](https://huggingface.co/spaces/MarwanAmin/Heart-Failure-Prediction-using-ML)
+
+---
+
+## 🔮 Future Improvements
+
+- Add Explainability using **SHAP** or **LIME**
+- Improve UI/UX of Streamlit app
+- Integrate as a full medical assistant tool
+- Deploy to cloud (e.g., AWS / Render)
+- Add patient history form for user input
+
+---
+
+## 📁 Project Structure
+
