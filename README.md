@@ -1,11 +1,11 @@
-# 🫀 Heart Failure Prediction using Machine Learning
+# Heart Failure Prediction using Machine Learning
 
 Predicting the likelihood of death events in heart failure patients using clinical features and various classification algorithms.  
 This project applies data cleaning, preprocessing, model training, evaluation, hyperparameter tuning (Optuna), and deployment using `Streamlit` and `Gradio`.
 
 ---
 
-## 📂 Dataset
+## Dataset
 
 - **Source**: [Heart Failure Clinical Records Dataset – Kaggle](https://www.kaggle.com/datasets/andrewmvd/heart-failure-clinical-data/data)
 - **Samples**: 299 patients  
@@ -13,21 +13,21 @@ This project applies data cleaning, preprocessing, model training, evaluation, h
 
 ---
 
-## 📊 Exploratory Data Analysis (EDA)
+## Exploratory Data Analysis (EDA)
 
 Key issues discovered during analysis:
 - **Outliers** in numerical features
 - **Skewed distributions** (e.g., creatinine, platelets)
 - **Imbalanced target class** (more survivors than deaths)
 
-### ✅ Solutions:
+### Solutions:
 - Removed outliers using IQR method  
 - Normalized skewed data using `Box-Cox Transformation`  
 - Applied `SMOTE` to balance target class
 
 ---
 
-## 🧹 Preprocessing
+## Preprocessing
 
 - **Train-Test Split** (after SMOTE)
 - **Standardization** using `StandardScaler`
@@ -36,7 +36,7 @@ Key issues discovered during analysis:
 
 ---
 
-## 🤖 Models Trained
+## Models Trained
 
 | Type           | Model                   |
 |----------------|--------------------------|
@@ -50,7 +50,7 @@ Key issues discovered during analysis:
 
 ---
 
-## 🏆 Model Comparison
+## Model Comparison
 
 All models were evaluated using:
 
@@ -60,13 +60,13 @@ All models were evaluated using:
 - **F1 Score**
 - **ROC-AUC**
 
-### 📌 Final Choice:
-- ✅ **Model**: `LightGBM`
-- ✅ **Why?**: Achieved **highest performance** across most metrics (especially F1-Score)
+### Final Choice:
+- **Model**: `LightGBM`
+- **Why?**: Achieved **highest performance** across most metrics (especially F1-Score)
 
 ---
 
-## 🔍 Hyperparameter Tuning
+## Hyperparameter Tuning
 
 - Implemented using [`Optuna`](https://optuna.org/)  
 - Tuned parameters like `num_leaves`, `learning_rate`, `max_depth`, etc.  
@@ -75,7 +75,7 @@ All models were evaluated using:
 
 ---
 
-## 🧪 Final Model Pipeline
+## Final Model Pipeline
 
 - Built using `Pipeline` from `scikit-learn`
 - Trained on best `LightGBM` model
@@ -84,7 +84,7 @@ All models were evaluated using:
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 The model was deployed using both:
 
@@ -93,7 +93,7 @@ The model was deployed using both:
 
 ---
 
-## 🔮 Future Improvements
+## Future Improvements
 
 - Add Explainability using **SHAP** or **LIME**
 - Improve UI/UX of Streamlit app
@@ -101,7 +101,5 @@ The model was deployed using both:
 - Deploy to cloud (e.g., AWS / Render)
 - Add patient history form for user input
 
----
 
-## 📁 Project Structure
 
